@@ -12,7 +12,7 @@ Layout is handled via [Bootstrap](http://getbootstrap.com/)
 After downloading the repo's contents, open index.html in any browser of your choice (Chrome recommended).
 
 ### Work In Progress
-Using Foursquare for getting the places and providing additional information for infoWindows ALONG the Wikipedia information.
+Using [Foursquare](https://developer.foursquare.com/docs/) for getting the places and providing additional information for infoWindows ALONG the [Wikipedia](https://www.mediawiki.org/wiki/API:Main_page) information.
 
 ## To-Do
 1. Add unique functionality beyond the minimum requirements (i.e. the ability to “favorite” a location, etc.).
@@ -33,7 +33,8 @@ May set 1on1 for some guidance...
 4. https://github.com/saranvoleti/Neighborhood-Map
 5. https://github.com/iqbal125/Neighborhood_Map
 6. https://github.com/Christianq010/Neighborhood-Map-Master
-7.
+
+
 ### Responsivness:
 [Bootstrap](http://getbootstrap.com/)
 [Simple Sidebar](https://blackrockdigital.github.io/startbootstrap-simple-sidebar/)

@@ -1,49 +1,42 @@
 let map;
 let infoWindow;
-// Hardcoded, plan in progress is to get these from Foursquare API-hence its ID
 let locations = [
   {
     title: "Ellen's Stardust Diner",
     location: {
       lat:40.761863,
       lng:-73.9857387
-    },
-    fourSquareVenueID: "4a63a7d0f964a52085c51fe3"
+    }
   },  {
     title: 'Park Avenue Tavern',
     location: {
       lat: 40.7502786,
       lng: -73.9808654
-    },
-    fourSquareVenueID: "4ce9ac41e888f04db250496b"
+    }
   }, {
     title: 'Gansevoort Park Avenue NYC',
     location: {
       lat: 40.7438815,
       lng: -73.9862687
-    },
-    fourSquareVenueID: "4bfd63edf7c82d7f831d8e04"
+    }
   }, {
     title: 'Union Square Park',
     location: {
       lat: 40.7362553,
       lng: -73.9924972
-    },
-    fourSquareVenueID: "3fd66200f964a520def11ee3"
+    }
   }, {
     title: 'Whole Foods Market',
     location: {
       lat: 40.73649,
       lng: -73.988175
-    },
-    fourSquareVenueID: "43bba61df964a520eb2c1fe3"
+    }
   }, {
     title: 'Nanoosh',
     location: {
       lat: 40.7342423,
       lng: -73.9943599
-    },
-    fourSquareVenueID: "4c24e9fcf7ced13ae6a0236d"
+    }
   }
 ];
 // Google's function for initializing the map.
@@ -65,15 +58,13 @@ function initMap() {
     // Get the position from the location array.
     let position = locations[i].location;
     let title = locations[i].title;
-    let fourSquareVenueID = locations[i].fourSquareVenueID
     // Create a marker per location, and put into markers array.
     var marker = new google.maps.Marker({
       map: map,
       position: position,
       title: title,
       animation: google.maps.Animation.DROP,
-      //For future Foursquare implementation - id
-      id: fourSquareVenueID
+      id:i
     });
     //Marker gets to be visible by default
     marker.setVisible(true);
@@ -139,10 +130,7 @@ function populateInfoWindow(marker, infowindow) {
       }
     }
   // Wikipedia API Ajax request - sampled from udacity lecture, need to add additional msg if there are no relevant wiki links to selected place.
-  // Both Ajax requests should probably be a separate functions and just called
-  // within populateInfoWindow function. This must be refactored in future because
-  // of repetition during infoWindow.setContent and during error handling there
-  // were conflicts.
+
     let wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
     $.ajax(wikiURL,{
       dataType: "jsonp",
@@ -166,35 +154,9 @@ function populateInfoWindow(marker, infowindow) {
         infowindow.open(map, marker);
     });
 
-    // FOURSQUARE API! We are still within populateInfoWindow function!
-    // Needs to be in a separate function as the Wiki request and called within
-    //populating infowindow for clarity and easier maintenance
-
-    // let apiURL = 'https://api.foursquare.com/v2/venues/';
-    // let fourSquareClientID = 'D0T4JAUHEPEX2HB2Z45H5EPIY4UM42GZIIM3M5N0HBJOTKFU'
-    // let fourSquareSecret ='JJKCBOMFEYBHMMXKEH1JQH21FT0WKJXOWSG54TTD3NFECAAW';
-    // let fourSquareVersion = '20170626';
-    // let venueFourSquareID = marker.id;
-    // let fourSquareURL = apiURL + venueFourSquareID + '?client_id=' + fourSquareClientID +  '&client_secret=' + fourSquareSecret +'&v=' + fourSquareVersion;
-    // $.ajax({
-    //     url: fourSquareURL,
-    //     dataType: 'json',
-    //     data: {
-    //       async: true
-    //     }
-    //     }).done(function(data) {
-    //         var venues = data.response.venues;
-    //         var infoContent = '<h3>Locations near ' + marker.title + '</h3><ul>';
-    //         infoContent += '</ul>';
-    //         infowindow.setContent(infoContent);
-    //         infowindow.open(map, marker);
-    //     });
-    // // .fail()});
-
   };
 
 } //end populateInfoWindow
-//Where to trigger this?
 var googleError = function() {
   alert('Sorry! Try again later!');
 };

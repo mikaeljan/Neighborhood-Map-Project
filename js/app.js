@@ -49,8 +49,8 @@ let ViewModel = function() {
     for (var i = 0; i < self.locationsList().length; i++) {
       //get all the markers back
       self.locationsList()[i].marker.setVisible(true);
-    };
-  }
+    }
+  };
 
   self.currentLocation = ko.observableArray([this.locationsList()[0]]);
 
@@ -60,7 +60,7 @@ let ViewModel = function() {
     animateUponClick(clickedLocation.marker);
     //populating the info window by clicked marker from list
     populateInfoWindow(clickedLocation.marker, infoWindow);
-  }
+  };
   //Observable for Menu | Navigation Bar Toggle Button
   self.visibleMenu = ko.observable(false),
   //Showing/Hiding the menu

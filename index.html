@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Hello Map</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/style.css">
+  <!--[if lt IE 9]>
+          <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+          <script>window.html5 || document.write('<script src="/static/js/vendor/html5shiv.js"><\/script>')</script>
+      <![endif]-->
+</head>
+
+<body>
+  <!--Side Menu -->
+  <aside>
+    <!--Observable that toggles CSS class on Side Menu Hide/Show-->
+    <div id="wrapper" data-bind="css: { 'toggled': visibleMenu }">
+      <!-- Sidebar -->
+      <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+          <li class="sidebar-brand">Choose a place</li>
+        </ul>
+        <!--Search Buttons -->
+        <div class="input-group">
+          <div class="row">
+            <div class="col-md-12 col-md-offset-1 search-area" id="search-area">
+              <br>
+              <input class="search-box" type="search" data-bind="textInput: filter">
+              <button data-bind='click: clearFilter'>Clear</button>
+              <!--Show <li class=location-list> and filter against the results from search -->
+              <ul class="placesList" data-bind='foreach: filteredLocations'>
+                <li class="location-item" data-bind="text: title, click: $root.selectLocation"></li>
+              </ul>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-12 col-md-offset-1">
+              <br>
+              <hr>
+              <a href="#menu-toggle" data-bind="click: clickMe" class="btn btn-default menu-toggle">Toggle Menu</a>
+            </div>
+          </div>
+          <br>
+        </div>
+      </div>
+      <!-- /#sidebar-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+  </aside>
+  <main>
+    <!--Page Content-->
+    <div id="page-content-wrapper">
+      <div class="container">
+        <div class="content col-lg-9">
+          <h2 class="navbar-heading">Map Project</h2>
+          <a href="#menu-toggle" data-bind="click: clickMe" class="btn btn-default menu-toggle" id="menu-toggle">Toggle Menu</a>
+        </div>
+      </div>
+    </div>
+    <!--/#page-content-wrapper-->
+
+    <article>
+      <!--Page Google Map-->
+      <div>
+        <div id="map"></div>
+      </div>
+      <!--/#page-map-wrapper-->
+    </article>
+
+    <div class="error-div-wrapper">
+      <!--Observable for Google Maps Error Div -->
+      <div class="no-map" data-bind="visible: mapError">
+        <p>Oops. Something is wrong! <br>Try again later.</p>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js">
+  </script>
+  <script src="js/map.js"></script>
+  <script src="js/app.js"></script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJMKLXa-zKBNKTQSyns4YHw4dIbMgp_Ts&v=3&callback=initMap">
+  </script>
+</body>
+
+</html>

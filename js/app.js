@@ -1,11 +1,11 @@
-let Location = function(data) {
-  this.title = ko.observable(data.title);
+var  Location = function(data) {
+  this.title = data.title;
   this.location = data.location;
 
 };
 
-let ViewModel = function() {
-  let self = this;
+var  ViewModel = function() {
+  var  self = this;
 
   self.locationsList = ko.observableArray([]);
 
@@ -17,7 +17,7 @@ let ViewModel = function() {
 
   self.filter = ko.observable('');
   self.filteredLocations = ko.computed(function() {
-    let filterResult = self.filter().toLowerCase();
+    var  filterResult = self.filter().toLowerCase();
 
     if (!filterResult) {
       for (var i = 0; i < self.locationsList().length; i++) {
@@ -27,12 +27,12 @@ let ViewModel = function() {
         if (self.locationsList()[i].marker) {
           self.locationsList()[i].marker.setVisible(true);
         }
-        return self.locationsList();
-      }
+      }//end for loop
+      return self.locationsList();
     } else {
       return ko.utils.arrayFilter(self.locationsList(), function(loc) {
         // test to see if item matches filter and store results as a variable
-        let match = loc.title().toLowerCase().indexOf(filterResult) >= 0;
+        var  match = loc.title.toLowerCase().indexOf(filterResult) >= 0;
         // set marker visibility based on match status
         if (loc.marker) {
           loc.marker.setVisible(match);
@@ -46,6 +46,7 @@ let ViewModel = function() {
 
   self.clearFilter = function() {
     self.filter('');
+    
     for (var i = 0; i < self.locationsList().length; i++) {
       //get all the markers back
       self.locationsList()[i].marker.setVisible(true);
@@ -70,5 +71,5 @@ let ViewModel = function() {
 
 };
 
-let vm = new ViewModel();
+var  vm = new ViewModel();
 ko.applyBindings(vm);

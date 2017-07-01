@@ -1,6 +1,6 @@
-let map;
-let infoWindow;
-let locations = [
+var  map;
+var  infoWindow;
+var  locations = [
   {
     title: "Ellen's Stardust Diner",
     location: {
@@ -50,14 +50,14 @@ function initMap() {
     mapTypeControl: false
   });
 
-  let largeInfowindow = new google.maps.InfoWindow();
+  var  largeInfowindow = new google.maps.InfoWindow();
   infoWindow = new google.maps.InfoWindow();
-  let bounds = new google.maps.LatLngBounds();
+  var  bounds = new google.maps.LatLngBounds();
   // The following group uses the location array to create an array of markers on initialize.
-  for (let i = 0; i < locations.length; i++) {
+  for (var  i = 0; i < locations.length; i++) {
     // Get the position from the location array.
-    let position = locations[i].location;
-    let title = locations[i].title;
+    var  position = locations[i].location;
+    var  title = locations[i].title;
     // Create a marker per location, and put into markers array.
     var marker = new google.maps.Marker({
       map: map,
@@ -89,7 +89,7 @@ function animateUponClick(marker) {
   setTimeout(function() {
     marker.setAnimation(null);
   }, 1460);
-};
+}
 
 // This function populates the infowindow when the marker is clicked. We'll only allow
 // one infowindow which will open at the marker that is clicked, and populate based
@@ -131,15 +131,15 @@ function populateInfoWindow(marker, infowindow) {
     }
   // Wikipedia API Ajax request - sampled from udacity lecture, need to add additional msg if there are no relevant wiki links to selected place.
 
-    let wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
+    var  wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
     $.ajax(wikiURL,{
       dataType: "jsonp",
       data: {
         async: true
       }
     }).done(function(response) {
-      let articleStr = response[1];
-      let URL = 'http://en.wikipedia.org/wiki/' + articleStr;
+      var  articleStr = response[1];
+      var  URL = 'http://en.wikipedia.org/wiki/' + articleStr;
       // Use streetview service to get the closest streetview image within
       // 50 meters of the markers position
       streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
@@ -154,9 +154,11 @@ function populateInfoWindow(marker, infowindow) {
         infowindow.open(map, marker);
     });
 
-  };
+  }
 
 } //end populateInfoWindow
 var googleError = function() {
-  alert('Sorry! Try again later!');
+  //Use DOM or Alert? Can both but Alert seems more disruptive.
+  // alert('Sorry! Try again later!');
+  vm.mapError(true);
 };

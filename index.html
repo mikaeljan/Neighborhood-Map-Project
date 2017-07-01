@@ -32,7 +32,7 @@
               <br>
               <input class="search-box" type="search" data-bind="textInput: filter">
               <button data-bind='click: clearFilter'>Clear</button>
-              <!--Show <li class=location-list> and filter against the results from search -->
+              <!-- Show <li class=location-list> and filter against the results from search -->
               <ul class="placesList" data-bind='foreach: filteredLocations'>
                 <li class="location-item" data-bind="text: title, click: $root.selectLocation"></li>
               </ul>
@@ -77,7 +77,7 @@
     <div class="error-div-wrapper">
       <!--Observable for Google Maps Error Div -->
       <div class="no-map" data-bind="visible: mapError">
-        <p>Oops. Something is wrong! <br>Try again later.</p>
+        <p>Oops. Something is wrong with Google Maps! <br>Try again later.<br> Sorry for the inconvenience.</p>
       </div>
     </div>
   </main>
@@ -87,8 +87,7 @@
   </script>
   <script src="js/map.js"></script>
   <script src="js/app.js"></script>
-  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJMKLXa-zKBNKTQSyns4YHw4dIbMgp_Ts&v=3&callback=initMap">
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJMKLXa-zKBNKTQSyns4YHw4dIbMgp_Ts&v=3&callback=initMap" async defer onerror="googleError()">
   </script>
 </body>
-
 </html>

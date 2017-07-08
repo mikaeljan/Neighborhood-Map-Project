@@ -3,6 +3,7 @@ Simple page web app running AJAX requests, [Google Maps API](https://developers.
 Javascript framework : [Knockout](http://knockoutjs.com/)</br>
 Layout is handled via [Bootstrap](http://getbootstrap.com/)
 
+## For a live demo: Setup a live demo!
 [Click here](https://mikaeljan.github.io/Neighborhood-Map-Project/). 
 ### Files and directories:
 1. CSS directory - .css styles

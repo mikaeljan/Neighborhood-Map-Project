@@ -5,6 +5,7 @@ Layout is handled via [Bootstrap](http://getbootstrap.com/)
 
 ## For a live demo:
 [Click here](https://mikaeljan.github.io/Neighborhood-Map-Project/). 
+!! Demo preview does not load Wikipedia API, please download the repo until patched. !!
 
 ### Files and directories:
 1. CSS directory - .css styles

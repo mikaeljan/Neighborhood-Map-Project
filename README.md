@@ -5,11 +5,7 @@ Layout is handled via [Bootstrap](http://getbootstrap.com/)
 
 ## For a live demo:
 [Click here](https://mikaeljan.github.io/Neighborhood-Map-Project/). 
-<<<<<<< HEAD
 !! Demo preview does not load Wikipedia API, please download the repo until patched. !!
-=======
-!! Demo does not process Wikipedia api requests - needs to be fixed !!
->>>>>>> refs/remotes/origin/gh-pages
 
 ### Files and directories:
 1. CSS directory - .css styles

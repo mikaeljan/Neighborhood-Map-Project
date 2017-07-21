@@ -5,6 +5,7 @@ Layout is handled via [Bootstrap](http://getbootstrap.com/)
 
 ## For a live demo:
 [Click here](https://mikaeljan.github.io/Neighborhood-Map-Project/). 
+
 ### Files and directories:
 1. CSS directory - .css styles
 2. JS directory - app.js and map.js javascript files

@@ -1,37 +1,42 @@
-var  map;
-var  infoWindow;
-var  locations = [
+var map;
+var infoWindow;
+var locations = [
   {
     title: "Ellen's Stardust Diner",
     location: {
-      lat:40.761863,
-      lng:-73.9857387
+      lat: 40.761863,
+      lng: -73.9857387
     }
-  },  {
+  },
+  {
     title: 'Park Avenue Tavern',
     location: {
       lat: 40.7502786,
       lng: -73.9808654
     }
-  }, {
+  },
+  {
     title: 'Gansevoort Park Avenue NYC',
     location: {
       lat: 40.7438815,
       lng: -73.9862687
     }
-  }, {
+  },
+  {
     title: 'Union Square Park',
     location: {
       lat: 40.7362553,
       lng: -73.9924972
     }
-  }, {
+  },
+  {
     title: 'Whole Foods Market',
     location: {
       lat: 40.73649,
       lng: -73.988175
     }
-  }, {
+  },
+  {
     title: 'Nanoosh',
     location: {
       lat: 40.7342423,
@@ -50,21 +55,20 @@ function initMap() {
     mapTypeControl: false
   });
 
-  var  largeInfowindow = new google.maps.InfoWindow();
   infoWindow = new google.maps.InfoWindow();
-  var  bounds = new google.maps.LatLngBounds();
+  var bounds = new google.maps.LatLngBounds();
   // The following group uses the location array to create an array of markers on initialize.
-  for (var  i = 0; i < locations.length; i++) {
+  for (var i = 0; i < locations.length; i++) {
     // Get the position from the location array.
-    var  position = locations[i].location;
-    var  title = locations[i].title;
+    var position = locations[i].location;
+    var title = locations[i].title;
     // Create a marker per location, and put into markers array.
     var marker = new google.maps.Marker({
       map: map,
       position: position,
       title: title,
       animation: google.maps.Animation.DROP,
-      id:i
+      id: i
     });
     //Marker gets to be visible by default
     marker.setVisible(true);
@@ -77,7 +81,6 @@ function initMap() {
       populateInfoWindow(this, infoWindow);
       animateUponClick(this);
     });
-
   }
   map.fitBounds(bounds);
 } // end InitMap
@@ -97,7 +100,7 @@ function animateUponClick(marker) {
 // Sample used and modified from the Udacity lectures
 function populateInfoWindow(marker, infowindow) {
   // Check to make sure the infowindow is not already opened on this marker.
-  if (infowindow.marker != marker) {
+  if (infowindow.marker !== marker) {
     // Clear the infowindow content to give the streetview time
     // to load.
     infowindow.setContent('');
@@ -115,7 +118,10 @@ function populateInfoWindow(marker, infowindow) {
     function getStreetView(data, status) {
       if (status == google.maps.StreetViewStatus.OK) {
         var nearStreetViewLocation = data.location.latLng;
-        var heading = google.maps.geometry.spherical.computeHeading(nearStreetViewLocation, marker.position);
+        var heading = google.maps.geometry.spherical.computeHeading(
+          nearStreetViewLocation,
+          marker.position
+        );
         // infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>');
         var panoramaOptions = {
           position: nearStreetViewLocation,
@@ -124,38 +130,68 @@ function populateInfoWindow(marker, infowindow) {
             pitch: 30
           }
         };
-        var panorama = new google.maps.StreetViewPanorama(document.getElementById('pano'), panoramaOptions);
+        var panorama = new google.maps.StreetViewPanorama(
+          document.getElementById('pano'),
+          panoramaOptions
+        );
       } else {
-        infowindow.setContent('<div>' + marker.title + '</div>' + '<div>No Street View Found</div>');
+        infowindow.setContent(
+          '<div>' + marker.title + '</div>' + '<div>No Street View Found</div>'
+        );
       }
     }
-  // Wikipedia API Ajax request - sampled from udacity lecture, need to add additional msg if there are no relevant wiki links to selected place.
+    // Wikipedia API Ajax request - sampled from udacity lecture, need to add additional msg if there are no relevant wiki links to selected place.
 
-    var  wikiURL = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + marker.title + '&format=json&callback=wikiCallback';
-    $.ajax(wikiURL,{
-      dataType: "jsonp",
+    var wikiURL =
+      'http://en.wikipedia.org/w/api.php?action=opensearch&search=' +
+      marker.title +
+      '&format=json&callback=wikiCallback';
+    $.ajax(wikiURL, {
+      dataType: 'jsonp',
       data: {
         async: true
       }
-    }).done(function(response) {
-      var  articleStr = response[1];
-      var  URL = 'http://en.wikipedia.org/wiki/' + articleStr;
-      // Use streetview service to get the closest streetview image within
-      // 50 meters of the markers position
-      streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-      infowindow.setContent('<div>' +
-        '<h3>' + marker.title + '</h3>' + '</div><br><a href ="' + URL + '">' + URL + '</a><hr><div id="pano"></div>');
-      // Open the infowindow on the correct marker.
-      infowindow.open(map, marker);
-    }).fail(function(jqXHR, textStatus) {
-      streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-      infowindow.setContent('<div>' +
-        '<h3>' + marker.title + '</h3>' + '</div><br><p>Sorry. We could not contact Wikipedia! </p><hr><div id="pano"></div>');
+    })
+      .done(function(response) {
+        var articleStr = response[1];
+        var URL = 'http://en.wikipedia.org/wiki/' + articleStr;
+        // Use streetview service to get the closest streetview image within
+        // 50 meters of the markers position
+        streetViewService.getPanoramaByLocation(
+          marker.position,
+          radius,
+          getStreetView
+        );
+        infowindow.setContent(
+          '<div>' +
+            '<h3>' +
+            marker.title +
+            '</h3>' +
+            '</div><br><a href ="' +
+            URL +
+            '">' +
+            URL +
+            '</a><hr><div id="pano"></div>'
+        );
+        // Open the infowindow on the correct marker.
         infowindow.open(map, marker);
-    });
-
+      })
+      .fail(function(jqXHR, textStatus) {
+        streetViewService.getPanoramaByLocation(
+          marker.position,
+          radius,
+          getStreetView
+        );
+        infowindow.setContent(
+          '<div>' +
+            '<h3>' +
+            marker.title +
+            '</h3>' +
+            '</div><br><p>Sorry. We could not contact Wikipedia! </p><hr><div id="pano"></div>'
+        );
+        infowindow.open(map, marker);
+      });
   }
-
 } //end populateInfoWindow
 var googleError = function() {
   //Use DOM or Alert? Can both but Alert seems more disruptive.
